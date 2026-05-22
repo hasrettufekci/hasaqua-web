@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HasAqua Fish Counter — Kameralı Balık Sayım Sistemi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0a1628;--accent:#00aaff;--accent2:#00d4aa;--gold:#f0a500;--text:#e8eef5;--text-muted:#8aa0b8;--card-bg:rgba(255,255,255,0.04);--card-border:rgba(0,170,255,0.15)}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{background:var(--navy);color:var(--text);font-family:'Source Sans 3',sans-serif;font-weight:300;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(0,100,200,0.18) 0%,transparent 70%);pointer-events:none;z-index:0}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:72px;background:rgba(10,22,40,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,170,255,0.1)}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{height:38px;width:38px;object-fit:contain;border-radius:8px}
+    .nav-logo-text{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:0.08em;color:var(--text)}
+    .nav-logo-text span{color:var(--accent)}
+    .nav-back{color:var(--text-muted);text-decoration:none;font-size:0.9rem;transition:color 0.2s}
+    .nav-back:hover{color:var(--accent)}
+
+    /* HERO */
+    .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 5% 80px}
+    .project-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(240,165,0,0.1);border:1px solid rgba(240,165,0,0.35);color:var(--gold);font-size:0.8rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:6px 18px;border-radius:100px;margin-bottom:2rem}
+    .project-badge::before{content:'⚙️';font-size:0.9rem}
+    .hero h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2.2rem,5vw,4rem);line-height:1.1;margin-bottom:1.25rem}
+    .hero h1 span{color:var(--accent)}
+    .hero-desc{color:var(--text-muted);font-size:1.1rem;line-height:1.8;max-width:620px;margin:0 auto 3rem}
+
+    /* DEV STATUS */
+    .dev-status{background:rgba(240,165,0,0.06);border:1px solid rgba(240,165,0,0.2);border-radius:16px;padding:2rem 2.5rem;max-width:680px;margin:0 auto 3rem;text-align:left}
+    .dev-status-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+    .dev-steps{display:flex;flex-direction:column;gap:12px}
+    .dev-step{display:flex;align-items:center;gap:12px;font-size:0.95rem}
+    .step-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .dot-done{background:var(--accent2)}
+    .dot-active{background:var(--gold);animation:pulse 2s infinite}
+    .dot-waiting{background:rgba(255,255,255,0.2)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+    .step-done{color:var(--text)}
+    .step-active{color:var(--gold);font-weight:600}
+    .step-waiting{color:var(--text-muted)}
+
+    /* FEATURES */
+    .features{position:relative;z-index:1;padding:80px 5%;max-width:1100px;margin:0 auto}
+    .sec-label{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;text-align:center}
+    .sec-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem);text-align:center;margin-bottom:0.5rem}
+    .sec-desc{color:var(--text-muted);text-align:center;margin-bottom:3rem;font-size:1rem;line-height:1.7}
+    .divider{width:50px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin:0.75rem auto 2rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
+    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:1.75rem;transition:transform 0.3s,border-color 0.3s}
+    .card:hover{transform:translateY(-4px);border-color:rgba(0,170,255,0.35)}
+    .card-icon{font-size:1.8rem;margin-bottom:0.75rem}
+    .card h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem}
+    .card p{color:var(--text-muted);font-size:0.88rem;line-height:1.6}
+
+    /* CTA */
+    .cta{position:relative;z-index:1;text-align:center;padding:80px 5%;background:linear-gradient(135deg,rgba(0,100,200,0.12),rgba(0,212,170,0.08))}
+    .cta h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:1rem}
+    .cta p{color:var(--text-muted);margin-bottom:2rem;font-size:1.05rem}
+    .btn-p{background:linear-gradient(135deg,var(--accent),#0077cc);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;padding:12px 28px;border-radius:8px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(0,170,255,0.3);display:inline-block}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,170,255,0.45)}
+    footer{position:relative;z-index:1;text-align:center;padding:2rem 5%;border-top:1px solid rgba(255,255,255,0.06);color:var(--text-muted);font-size:0.85rem}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:rgba(0,170,255,0.3);border-radius:3px}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.jpg" alt="HasAqua"/>
+    <span class="nav-logo-text">HAS<span>AQUA</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Tüm Ürünler</a>
+</nav>
+
+<div class="hero">
+  <div class="project-badge">Proje Aşamasında — Geliştiriliyor</div>
+  <h1>HasAqua<br><span>Fish Counter</span></h1>
+  <p class="hero-desc">Kamera tabanlı yapay zeka ile balıklarınızı otomatik sayın. Transfer sırasında insan müdahalesi olmadan, yüksek doğruluk oranıyla anlık balık sayımı. Özel donanım + yazılım seti olarak geliştiriliyor.</p>
+
+  <div class="dev-status">
+    <div class="dev-status-title">🔧 Geliştirme Durumu</div>
+    <div class="dev-steps">
+      <div class="dev-step"><div class="step-dot dot-done"></div><span class="step-done">✅ Proje tasarımı ve algoritma araştırması tamamlandı</span></div>
+      <div class="dev-step"><div class="step-dot dot-done"></div><span class="step-done">✅ Prototip kamera kurulumu test edildi</span></div>
+      <div class="dev-step"><div class="step-dot dot-active"></div><span class="step-active">⚙️ Yapay zeka model eğitimi devam ediyor</span></div>
+      <div class="dev-step"><div class="step-dot dot-waiting"></div><span class="step-waiting">⏳ Donanım tasarımı ve üretim</span></div>
+      <div class="dev-step"><div class="step-dot dot-waiting"></div><span class="step-waiting">⏳ Saha testleri ve Fish Manager entegrasyonu</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="features">
+  <div class="sec-label">Planlanan Özellikler</div>
+  <h2 class="sec-title">Fish Counter Ne Yapacak?</h2>
+  <p class="sec-desc">Geliştirme tamamlandığında HasAqua Fish Counter şu özelliklere sahip olacak:</p>
+  <div class="divider"></div>
+  <div class="grid">
+    <div class="card"><div class="card-icon">🎥</div><h4>Kamera Tabanlı Sayım</h4><p>Transfer kanalına yerleştirilen özel kamera, geçen her balığı otomatik olarak sayar. Manuel sayım hatası sıfır.</p></div>
+    <div class="card"><div class="card-icon">🤖</div><h4>Yapay Zeka Modeli</h4><p>Alabalık türlerine özel eğitilmiş görüntü işleme modeli ile yüksek doğruluk oranı. Farklı boyut ve hızlardaki balıkları tanır.</p></div>
+    <div class="card"><div class="card-icon">⚡</div><h4>Gerçek Zamanlı Sayım</h4><p>Transfer süresince anlık sayım yapılır, sonuç transfer bitince ekranda görünür. Bekleme yok.</p></div>
+    <div class="card"><div class="card-icon">🔧</div><h4>Özel Donanım Seti</h4><p>Su geçirmez, tesis koşullarına dayanıklı kamera ve işlem ünitesi. Plug & play kurulum.</p></div>
+    <div class="card"><div class="card-icon">🔗</div><h4>Fish Manager Entegrasyonu</h4><p>Sayım sonuçları otomatik olarak Fish Manager Desktop ve Mobile'a aktarılır. Manuel giriş gerekmiyor.</p></div>
+    <div class="card"><div class="card-icon">📋</div><h4>Sayım Kayıtları</h4><p>Her sayım tarih, saat, kaynak ve hedef havuz bilgisiyle kayıt altına alınır. Geçmiş sayımlar raporlanabilir.</p></div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>Ön Kayıt veya Bilgi Almak İster Misiniz?</h2>
+  <p>Geliştirme sürecini takip etmek veya ilk kullanıcılar arasında yer almak için bizimle iletişime geçin.</p>
+  <a href="index.html#iletisim" class="btn-p">İletişime Geç</a>
+</div>
+<footer><p>© 2026 HasAqua — Tüm hakları saklıdır.</p></footer>
+</body>
+</html>

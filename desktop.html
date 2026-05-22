@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HasAqua Fish Manager Desktop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0a1628;--navy2:#0d1f3c;--accent:#00aaff;--accent2:#00d4aa;--text:#e8eef5;--text-muted:#8aa0b8;--card-bg:rgba(255,255,255,0.04);--card-border:rgba(0,170,255,0.15)}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{background:var(--navy);color:var(--text);font-family:'Source Sans 3',sans-serif;font-weight:300;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(0,100,200,0.18) 0%,transparent 70%);pointer-events:none;z-index:0}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:72px;background:rgba(10,22,40,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,170,255,0.1)}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{height:38px;width:38px;object-fit:contain;border-radius:8px}
+    .nav-logo-text{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:0.08em;color:var(--text)}
+    .nav-logo-text span{color:var(--accent)}
+    .nav-back{color:var(--text-muted);text-decoration:none;font-size:0.9rem;transition:color 0.2s}
+    .nav-back:hover{color:var(--accent)}
+    /* HERO */
+    .hero{position:relative;z-index:1;padding:120px 8% 80px;display:flex;align-items:center;gap:6%;min-height:90vh}
+    .hero-text{flex:1}
+    .tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:var(--accent2);font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:1.5rem}
+    .tag::before{content:'';width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+    .hero h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3.5rem);line-height:1.1;margin-bottom:1.25rem}
+    .hero h1 span{color:var(--accent)}
+    .hero p{color:var(--text-muted);font-size:1.1rem;line-height:1.8;margin-bottom:2rem;max-width:480px}
+    .btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-p{background:linear-gradient(135deg,var(--accent),#0077cc);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;padding:12px 28px;border-radius:8px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(0,170,255,0.3);display:inline-block}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,170,255,0.45)}
+    .btn-s{background:transparent;color:var(--text);font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.9rem;padding:12px 28px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:border-color 0.2s,background 0.2s;display:inline-block}
+    .btn-s:hover{border-color:var(--accent);background:rgba(0,170,255,0.08)}
+    .hero-img{flex:1}
+    .hero-img img{width:100%;border-radius:14px;border:1px solid rgba(0,170,255,0.25);box-shadow:0 30px 80px rgba(0,0,0,0.5);cursor:zoom-in;transition:transform 0.3s}
+    .hero-img img:hover{transform:scale(1.01)}
+    /* FEATURE ROWS */
+    .section{position:relative;z-index:1;padding:80px 8%}
+    .section.alt{background:rgba(255,255,255,0.02)}
+    .row{display:flex;align-items:center;gap:6%;margin-bottom:90px}
+    .row:last-child{margin-bottom:0}
+    .row.rev{flex-direction:row-reverse}
+    .row-text{flex:1}
+    .row-img{flex:1.2}
+    .row-img img{width:100%;border-radius:12px;border:1px solid rgba(0,170,255,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.45);cursor:zoom-in;transition:transform 0.3s,box-shadow 0.3s}
+    .row-img img:hover{transform:scale(1.02);box-shadow:0 30px 80px rgba(0,0,0,0.55)}
+    .badge{display:inline-block;background:rgba(0,170,255,0.1);color:var(--accent);font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:1rem}
+    .row-text h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.2;margin-bottom:1rem}
+    .row-text p{color:var(--text-muted);font-size:1rem;line-height:1.8;margin-bottom:1.5rem}
+    ul.flist{list-style:none;display:flex;flex-direction:column;gap:10px}
+    ul.flist li{display:flex;align-items:flex-start;gap:10px;font-size:0.95rem;color:var(--text-muted);line-height:1.5}
+    ul.flist li::before{content:'✓';color:var(--accent2);font-weight:700;font-size:0.85rem;margin-top:2px;flex-shrink:0}
+    /* GRID */
+    .grid-section{position:relative;z-index:1;padding:80px 8%;background:rgba(255,255,255,0.02)}
+    .sec-head{text-align:center;margin-bottom:50px}
+    .sec-label{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+    .sec-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem)}
+    .divider{width:50px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin:1rem auto 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;max-width:1100px;margin:0 auto}
+    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:1.5rem;transition:transform 0.3s,border-color 0.3s}
+    .card:hover{transform:translateY(-4px);border-color:rgba(0,170,255,0.35)}
+    .card-icon{font-size:1.6rem;margin-bottom:0.75rem}
+    .card h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:0.5rem}
+    .card p{color:var(--text-muted);font-size:0.85rem;line-height:1.6}
+    /* CTA */
+    .cta{position:relative;z-index:1;text-align:center;padding:80px 5%;background:linear-gradient(135deg,rgba(0,100,200,0.12),rgba(0,212,170,0.08))}
+    .cta h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:1rem}
+    .cta p{color:var(--text-muted);margin-bottom:2rem;font-size:1.05rem}
+    footer{position:relative;z-index:1;text-align:center;padding:2rem 5%;border-top:1px solid rgba(255,255,255,0.06);color:var(--text-muted);font-size:0.85rem}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;opacity:0;pointer-events:none;transition:opacity 0.2s}
+    .lightbox.open{opacity:1;pointer-events:all}
+    .lightbox img{max-width:100%;max-height:90vh;border-radius:8px}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:rgba(0,170,255,0.3);border-radius:3px}
+    @media(max-width:768px){.hero,.row,.row.rev{flex-direction:column;padding:100px 5% 60px}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.jpg" alt="HasAqua"/>
+    <span class="nav-logo-text">HAS<span>AQUA</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Tüm Ürünler</a>
+</nav>
+
+<!-- HERO: Ana ekran görseli -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="tag">Aktif · Windows</div>
+    <h1>Fish Manager<br><span>Desktop</span></h1>
+    <p>Su ürünleri tesislerinizi masaüstünden uçtan uca yönetin. Havuz tanımlamalarından günlük kontrol listesine, otomatik yemleme planından kapsamlı raporlara — her şey tek çatı altında.</p>
+    <div class="btns">
+      <a href="index.html#iletisim" class="btn-p">Demo Talep Et</a>
+      <a href="#ozellikler" class="btn-s">Özellikleri İncele</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="images/ana-ekran.png" alt="Ana Ekran" onclick="lb(this.src)"/>
+  </div>
+</div>
+
+<div class="section" id="ozellikler">
+
+  <!-- Dashboard: Canlı grafikler -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Canlı İzleme</div>
+      <h2>Tesis Dashboard —<br>Gerçek Zamanlı Grafikler</h2>
+      <p>Günlük yem tüketimi, zaiyat trendi, FCR değerleri ve tüm havuzların yoğunluk bilgilerini anlık grafiklerle izleyin. 30 günlük veriler otomatik güncellenir.</p>
+      <ul class="flist">
+        <li>Günlük yem tüketimi çizgi grafiği (son 30 gün)</li>
+        <li>Zaiyat trend analizi (adet bazlı)</li>
+        <li>FCR trend gösterimi</li>
+        <li>Havuz bazlı kg/m³ yoğunluk bar grafiği</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/dashboard.png" alt="Dashboard" onclick="lb(this.src)"/></div>
+  </div>
+
+  <!-- Stok raporu: Havuz stok tablosu -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">Stok Yönetimi</div>
+      <h2>Havuz Stok Raporu —<br>Tam Kapasite Görünümü</h2>
+      <p>Tüm blok ve havuzların adet, ortalama gram, toplam kg, yoğunluk ve kapasite bilgilerini tek ekranda görün. Limite yaklaşan havuzlar sarı, aşanlar kırmızıya döner.</p>
+      <ul class="flist">
+        <li>Blok & havuz bazlı detaylı stok tablosu</li>
+        <li>kg/m³ yoğunluk ve limit karşılaştırması</li>
+        <li>Renk kodlu durum: Normal / Yaklaştı / Aştı</li>
+        <li>Anlık toplam biyokütle ve adet özeti</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/stok-raporu.png" alt="Stok Raporu" onclick="lb(this.src)"/></div>
+  </div>
+
+  <!-- Yemleme planı: 15 günlük tablo -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Akıllı Planlama</div>
+      <h2>Otomatik Yemleme Planı —<br>15 Günlük Blok Bazlı</h2>
+      <p>Her havuz için ortalama gram, stok kg ve yem boyutuna göre 15 günlük yemleme planını tek tıkla oluşturun. Düşük oksijen riski varsa sistem yem miktarını otomatik %30 azaltır.</p>
+      <ul class="flist">
+        <li>Blok bazlı 15 günlük otomatik plan oluşturma</li>
+        <li>Havuz bazlı yem boyutu ve günlük artış (‰) ayarı</li>
+        <li>Düşük oksijen riski: %30 otomatik azaltma</li>
+        <li>Excel'e aktarım (plan_15gun.xlsx)</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/yemleme-plani.png" alt="Yemleme Planı" onclick="lb(this.src)"/></div>
+  </div>
+
+  <!-- Kontrol listesi: Kırmızı-sarı-yeşil uyarı tablosu -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">Uyarı Sistemi</div>
+      <h2>Günlük Kontrol Listesi —<br>Akıllı Alarm Paneli</h2>
+      <p>Her gün açılışta kontrol edilmesi gereken kritik kalemler otomatik listelenir. Zaiyat artışı olan havuzlar kırmızı, kapasiteye yaklaşanlar sarı, normalller yeşil gösterilir.</p>
+      <ul class="flist">
+        <li>Son 3 gündeki zaiyat artışı olan havuzlar kırmızı</li>
+        <li>kg/m³ limitine yaklaşan havuzlar sarı uyarısı</li>
+        <li>Her uyarı için aksiyon önerisi (seyreltme, hasat vb.)</li>
+        <li>"Sadece uyarıları göster" filtre seçeneği</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/kontrol-listesi.png" alt="Kontrol Listesi" onclick="lb(this.src)"/></div>
+  </div>
+
+  <!-- Yem sipariş önerisi: Renk kodlu tablo -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Yem Yönetimi</div>
+      <h2>Yem Sipariş Önerisi —<br>Otomatik Stok Hesabı</h2>
+      <p>Mevcut yem stoklarınız ve son 30 günlük ortalama tüketim hızına göre, hedef gün sayısı için kaç kg sipariş etmeniz gerektiğini sistem otomatik hesaplar.</p>
+      <ul class="flist">
+        <li>Marka ve numara bazlı yem stok takibi</li>
+        <li>Günlük ortalama tüketim ve kalan gün hesabı</li>
+        <li>Kırmızı: kritik, sarı: dikkat, yeşil: yeterli</li>
+        <li>Önerilen alım miktarı otomatik hesaplanır</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/yem-siparis.png" alt="Yem Sipariş Önerisi" onclick="lb(this.src)"/></div>
+  </div>
+
+  <!-- Zaiyat raporu: Havuz döngü bazlı tablo -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">Kayıp Takibi</div>
+      <h2>Zaiyat Raporu —<br>Havuz & Blok Döngü Bazlı</h2>
+      <p>Tüm blok ve havuzlar için seçilen tarih aralığında zaiyat adet, kg ve günlük ortalama değerlerini görün. Toplam satırı sarı ile vurgulanır, Excel'e aktarın.</p>
+      <ul class="flist">
+        <li>Blok & havuz bazlı zaiyat detayı</li>
+        <li>Son 15 veya 30 gün filtreleme</li>
+        <li>Günlük ortalama adet hesabı</li>
+        <li>Toplam zaiyat özeti ve Excel aktarımı</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/zaiyat.png" alt="Zaiyat Raporu" onclick="lb(this.src)"/></div>
+  </div>
+
+  <!-- FCR: Aylık tablo sarı toplam satırı -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Verimlilik Analizi</div>
+      <h2>Tesis FCR Raporu —<br>Yıllık Aylık Kırılım</h2>
+      <p>Tesisinizin yıllık FCR performansını aylık bazda izleyin. Giren balık, çıkan yavru, hasat, zaiyat ve verilen yem miktarlarını tek tabloda görün. Yıllık toplam satırı sarı ile vurgulanır.</p>
+      <ul class="flist">
+        <li>12 aylık FCR karşılaştırma tablosu</li>
+        <li>Yıllık toplam ve FCR özeti (sarı vurgulu)</li>
+        <li>Giren/çıkan yavru, hasat, zaiyat karşılaştırması</li>
+        <li>Excel'e aktarım ile kolay paylaşım</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/fcr.png" alt="FCR Raporu" onclick="lb(this.src)"/></div>
+  </div>
+
+  <!-- Performans: Kalem listesi renkli ikonlar -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">Performans Analizi</div>
+      <h2>Aylık Performans Raporu —<br>Özet & PDF Çıktı</h2>
+      <p>Seçilen dönem için yavru girişi, hasat, yem tüketimi ve zaiyat özetini tek sayfada görün. Alt satırda dönem özeti otomatik hesaplanır. PDF veya Excel ile paylaşın.</p>
+      <ul class="flist">
+        <li>Dönem bazlı özet: yavru, hasat, yem, zaiyat</li>
+        <li>Net yavru, toplam hasat ve yem tüketimi özeti</li>
+        <li>PDF kaydetme özelliği</li>
+        <li>Excel'e aktarım</li>
+      </ul>
+    </div>
+    <div class="row-img"><img src="images/performans.png" alt="Performans Raporu" onclick="lb(this.src)"/></div>
+  </div>
+
+</div>
+
+<!-- GRID -->
+<div class="grid-section">
+  <div class="sec-head">
+    <div class="sec-label">Tüm Özellikler</div>
+    <h2 class="sec-title">20+ Modül, Tek Yazılım</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-icon">🐟</div><h4>Yavru / Hasat Girişi</h4><p>Havuz bazlı yavru girişi, çıkışı ve hasat kayıtları.</p></div>
+    <div class="card"><div class="card-icon">🍽️</div><h4>Günlük Toplu Yem</h4><p>Tüm havuzlar için toplu yem tüketimi ve zaiyat girişi.</p></div>
+    <div class="card"><div class="card-icon">💉</div><h4>Aşı & İlaç Takibi</h4><p>Stok girişi, kullanım kaydı ve stok alarmları.</p></div>
+    <div class="card"><div class="card-icon">🔄</div><h4>Havuz Hareketi</h4><p>Transfer, boylama ve aşılama işlemlerinin kaydı.</p></div>
+    <div class="card"><div class="card-icon">📋</div><h4>Havuz Kartı</h4><p>Her havuzun tam geçmişi, tüm hareketler tek raporda.</p></div>
+    <div class="card"><div class="card-icon">📊</div><h4>Ortalama Karşılaştırma</h4><p>15-30 günlük dönem bazlı ortalama gram karşılaştırması.</p></div>
+    <div class="card"><div class="card-icon">💾</div><h4>Yedek & Geri Yükleme</h4><p>Tek tıkla veritabanı yedekleme ve geri yükleme.</p></div>
+    <div class="card"><div class="card-icon">👥</div><h4>Kullanıcı Yönetimi</h4><p>Çoklu kullanıcı, yetki seviyeleri ve giriş takibi.</p></div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>Tesisini Dijitale Taşı</h2>
+  <p>Demo talebi veya fiyat bilgisi için hemen iletişime geçin.</p>
+  <a href="index.html#iletisim" class="btn-p">Demo Talep Et</a>
+</div>
+<footer><p>© 2026 HasAqua — Tüm hakları saklıdır.</p></footer>
+<div class="lightbox" id="lb" onclick="closeLb()"><img id="lbi" src="" alt=""/></div>
+<script>
+  function lb(src){document.getElementById('lbi').src=src;document.getElementById('lb').classList.add('open')}
+  function closeLb(){document.getElementById('lb').classList.remove('open')}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()})
+</script>
+</body>
+</html>

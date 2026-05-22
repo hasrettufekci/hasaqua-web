@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HasAqua — Akuakültür Teknoloji Çözümleri</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy2: #0d1f3c;
+      --blue: #1a4a7a;
+      --accent: #00aaff;
+      --accent2: #00d4aa;
+      --gold: #f0a500;
+      --text: #e8eef5;
+      --text-muted: #8aa0b8;
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(0,170,255,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,100,200,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 90% 80%, rgba(0,212,170,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero {
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('images/hero-bg.jpg') center center / cover no-repeat;
+      opacity: 0.18;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,170,255,0.1);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 42px;
+      width: 42px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+
+    .nav-logo-text span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--navy) !important;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: #33bbff !important;
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,170,255,0.1);
+      border: 1px solid rgba(0,170,255,0.3);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      animation: fadeDown 0.8s 0.1s ease both;
+    }
+
+    .hero h1 .line1 { display: block; color: var(--text); }
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      animation: fadeDown 0.8s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #0077cc);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(0,170,255,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,170,255,0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(0,170,255,0.08);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      animation: fadeDown 0.8s 0.4s ease both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── PRODUCTS ── */
+    #urunler {
+      background: rgba(255,255,255,0.015);
+    }
+
+    .products-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .products-header .section-desc {
+      margin: 0 auto;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,170,255,0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .product-card:hover::before { transform: scaleX(1); }
+
+    .product-card.coming-soon {
+      opacity: 0.65;
+    }
+
+    .product-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .icon-blue { background: rgba(0,170,255,0.15); }
+    .icon-green { background: rgba(0,212,170,0.15); }
+    .icon-gold { background: rgba(240,165,0,0.15); }
+    .icon-purple { background: rgba(150,100,255,0.15); }
+
+    .product-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-active { background: rgba(0,212,170,0.15); color: var(--accent2); }
+    .tag-soon { background: rgba(240,165,0,0.15); color: var(--gold); }
+
+    .product-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .product-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .product-features li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .product-features li::before {
+      content: '✓';
+      color: var(--accent2);
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    .product-arrow {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,170,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--accent);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .product-card:hover .product-arrow {
+      background: var(--accent);
+      color: var(--navy);
+      transform: rotate(45deg);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,12,25,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--navy2);
+      border: 1px solid rgba(0,170,255,0.2);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(30px) scale(0.97);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      padding: 2rem 2.5rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      line-height: 1.2;
+    }
+
+    .modal-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    .modal-close {
+      background: rgba(255,255,255,0.08);
+      border: none;
+      color: var(--text);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.15); }
+
+    .modal-body {
+      padding: 2rem 2.5rem;
+    }
+
+    .modal-screenshots {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,170,255,0.3) transparent;
+    }
+
+    .modal-screenshots img {
+      height: 220px;
+      width: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(0,170,255,0.15);
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .modal-screenshots img:hover {
+      transform: scale(1.02);
+      border-color: rgba(0,170,255,0.4);
+    }
+
+    .modal-features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .modal-feature {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .modal-feature-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-feature h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-feature p {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    /* Image lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 0 80px rgba(0,170,255,0.2);
+    }
+
+    /* ── FEATURES STRIP ── */
+    .features-strip {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-item {
+      flex: 1;
+      min-width: 200px;
+      max-width: 260px;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      transition: transform 0.3s;
+    }
+
+    .feature-item:hover { transform: translateY(-4px); }
+
+    .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+    .feature-item h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-item p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* ── CONTACT ── */
+    #iletisim {
+      text-align: center;
+    }
+
+    .contact-box {
+      display: inline-flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(0,170,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .contact-item-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .contact-item-value {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem 5%;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin: 1rem auto 0;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,170,255,0.3); border-radius: 3px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .modal-body { padding: 1.5rem; }
+      .modal-header { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="images/logo.jpg" alt="HasAqua Logo" />
+      <span class="nav-logo-text">HAS<span>AQUA</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#urunler">Ürünler</a></li>
+      <li><a href="#ozellikler">Özellikler</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+      <li><a href="#iletisim" class="nav-cta">Bize Ulaşın</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Akuakültür Teknolojisi</div>
+    <h1>
+      <span class="line1">Tesisini Dijitale</span>
+      <span class="line2">Taşımanın Zamanı</span>
+    </h1>
+    <p class="hero-sub">
+      HasAqua, alabalık ve su ürünleri tesislerinizi uçtan uca dijitalleştiren yazılım ve donanım çözümleri sunar. Sayımdan rapora, yemlemeden analize — her şey elinizin altında.
+    </p>
+    <div class="hero-actions">
+      <a href="#urunler" class="btn-primary">Ürünleri Keşfet</a>
+      <a href="#iletisim" class="btn-secondary">Demo Talep Et</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Ürün</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">950K+</div>
+        <div class="stat-label">Takip Edilen Balık</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Rapor Türü</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="urunler">
+    <div class="products-header">
+      <div class="section-label">Ürün Ailesi</div>
+      <h2 class="section-title">HasAqua Çözümleri</h2>
+      <p class="section-desc">Tesisinizin ihtiyacına göre şekillenen, birbirine entegre çalışan teknoloji ekosistemi.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Fish Manager Desktop -->
+      <div class="product-card" onclick="window.location='desktop.html'">
+        <div class="product-icon icon-blue">🖥️</div>
+        <span class="product-tag tag-active">Aktif</span>
+        <h3>HasAqua Fish Manager<br>Desktop</h3>
+        <p>Su ürünleri tesislerinizi masaüstünden yönetin. Stok, yemleme, rapor ve alarm sistemleri tek çatı altında.</p>
+        <ul class="product-features">
+          <li>Gerçek zamanlı stok & biyokütle takibi</li>
+          <li>Otomatik yemleme planı (15 gün)</li>
+          <li>20+ detaylı rapor & Excel aktarım</li>
+          <li>Günlük kontrol & alarm sistemi</li>
+          <li>FCR, zaiyat ve performans analizi</li>
+        </ul>
+        <div class="product-arrow">→</div>
+      </div>
+
+      <!-- Fish Manager Mobile -->
+      <div class="product-card" onclick="window.location='mobile.html'">
+        <div class="product-icon icon-green">📱</div>
+        <span class="product-tag tag-active">Aktif</span>
+        <h3>HasAqua Fish Manager<br>Mobile</h3>
+        <p>Tesis yönetimini cebinize taşıyın. Masaüstü yazılımıyla tam entegre, sahada anlık veri girişi.</p>
+        <ul class="product-features">
+          <li>Masaüstü ile gerçek zamanlı senkronizasyon</li>
+          <li>Sahada hızlı veri girişi</li>
+          <li>Anlık bildirim & alarm</li>
+          <li>Havuz & stok görüntüleme</li>
+          <li>Android desteği</li>
+        </ul>
+        <div class="product-arrow">→</div>
+      </div>
+
+      <!-- Fish Counter -->
+      <div class="product-card" onclick="window.location='counter.html'">
+        <div class="product-icon icon-gold">🎥</div>
+        <span class="product-tag tag-soon">Proje Aşamasında</span>
+        <h3>HasAqua Fish Counter</h3>
+        <p>Kamera tabanlı yapay zeka ile balıklarınızı otomatik sayın. İnsan hatası sıfır, hız maksimum.</p>
+        <ul class="product-features">
+          <li>Kameralı otomatik balık sayımı</li>
+          <li>Yapay zeka destekli görüntü işleme</li>
+          <li>Özel donanım + yazılım seti</li>
+          <li>Fish Manager ile doğrudan entegrasyon</li>
+          <li>Yüksek doğruluk oranı</li>
+        </ul>
+        <div class="product-arrow">→</div>
+      </div>
+
+      <!-- Eggs Counter -->
+      <div class="product-card coming-soon" onclick="window.location='eggs.html'">
+        <div class="product-icon icon-purple">🥚</div>
+        <span class="product-tag tag-soon">Proje Aşamasında</span>
+        <h3>HasAqua Eggs Counter</h3>
+        <p>Alabalık yumurta sayımını otomatikleştirin. Kamera tabanlı yapay zeka ve özel makine tasarımı ile geliyor.</p>
+        <ul class="product-features">
+          <li>Yumurta sayım yazılımı</li>
+          <li>Özel sayım makinesi tasarımı</li>
+          <li>Partiye göre kayıt ve takip</li>
+          <li>Kuluçka yönetimiyle entegrasyon</li>
+        </ul>
+        <div class="product-arrow">→</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="ozellikler">
+    <div style="text-align:center; margin-bottom:60px;">
+      <div class="section-label">Neden HasAqua?</div>
+      <h2 class="section-title">Tesisinize Özel Tasarlandı</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="features-strip">
+      <div class="feature-item">
+        <div class="feature-icon">📊</div>
+        <h4>Kapsamlı Raporlama</h4>
+        <p>FCR, zaiyat, yem tüketimi ve performans raporları. Excel ve PDF çıktısı.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔔</div>
+        <h4>Akıllı Alarm Sistemi</h4>
+        <p>Yem stoku, ilaç, aşı ve havuz yoğunluğu için otomatik uyarılar.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔄</div>
+        <h4>Masaüstü & Mobil Sync</h4>
+        <p>Ofiste ve sahada aynı veri, anlık senkronizasyon.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🛡️</div>
+        <h4>Güvenli Lisanslama</h4>
+        <p>Tesis bazlı lisans sistemi, verileriniz size ait.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📅</div>
+        <h4>Yemleme Planlaması</h4>
+        <p>15 günlük otomatik yemleme planı, düşük oksijen riski desteği.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video" style="padding:80px 5%; text-align:center; background:rgba(255,255,255,0.015);">
+    <div class="section-label">Tanıtım</div>
+    <h2 class="section-title" style="margin-bottom:0.5rem;">HasAqua'yı İzleyin</h2>
+    <p style="color:var(--text-muted); margin-bottom:2.5rem; font-size:1.05rem;">Yazılımın nasıl çalıştığını kısa tanıtım videosuyla keşfedin.</p>
+    <div style="max-width:900px; margin:0 auto; border-radius:16px; overflow:hidden; border:1px solid rgba(0,170,255,0.2); box-shadow:0 30px 80px rgba(0,0,0,0.5);">
+      <video controls poster="images/hero-bg.jpg" style="width:100%; display:block; background:#000;">
+        <source src="images/tanitim.mp4" type="video/mp4">
+        Tarayıcınız video oynatmayı desteklemiyor.
+      </video>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="iletisim" style="background: rgba(255,255,255,0.015);">
+    <div class="section-label" style="text-align:center;">İletişim</div>
+    <h2 class="section-title" style="text-align:center;">Bizimle Çalışın</h2>
+    <p style="text-align:center; color:var(--text-muted); margin-top:0.75rem;">Demo, teknik destek veya fiyat bilgisi için bize ulaşın.</p>
+    <div class="contact-box">
+      <a href="mailto:info@hasaqua.com" class="contact-item">
+        <div class="contact-item-icon">✉️</div>
+        <div>
+          <div class="contact-item-label">E-POSTA</div>
+          <div class="contact-item-value">info@hasaqua.com</div>
+        </div>
+      </a>
+      <a href="tel:+905317933693" class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <div class="contact-item-label">TELEFON</div>
+          <div class="contact-item-value">+90 531 793 36 93</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 HasAqua — Tüm hakları saklıdır.</p>
+    <p style="margin-top:6px; font-size:0.8rem;">Akıllı Su Ürünleri Çözümleri · Balık Sayım · Tesis Yönetimi · Üretim Teknolojisi</p>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+    <div class="modal" id="modal-content">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modal-title"></div>
+          <div class="modal-subtitle" id="modal-subtitle"></div>
+        </div>
+        <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-screenshots" id="modal-screenshots"></div>
+        <div class="modal-features-grid" id="modal-features"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    const modalData = {
+      desktop: {
+        title: 'HasAqua Fish Manager — Desktop',
+        subtitle: 'Masaüstü Tesis Yönetim Yazılımı · Windows',
+        screenshots: [
+          'images/desktop-main.png',
+          'images/desktop-dashboard.png',
+          'images/desktop-report.png',
+          'images/desktop-feeding.png',
+          'images/desktop-control.png',
+          'images/desktop-stock.png',
+          'images/desktop-feed-order.png',
+          'images/desktop-mortality.png',
+          'images/desktop-fcr.png',
+          'images/desktop-performance.png',
+        ],
+        features: [
+          { icon: '📈', title: 'Canlı Dashboard', desc: 'Günlük yem tüketimi, zaiyat trendi, FCR ve havuz yoğunluklarını gerçek zamanlı grafiklerde izleyin.' },
+          { icon: '🐟', title: 'Havuz Stok Takibi', desc: 'Tüm blok ve havuzların adet, kg ve yoğunluk bilgilerini tek ekranda görün.' },
+          { icon: '🍽️', title: 'Otomatik Yemleme Planı', desc: '15 günlük blok bazlı yemleme planı oluşturun, düşük oksijen riski için otomatik azaltma yapın.' },
+          { icon: '⚠️', title: 'Günlük Kontrol Listesi', desc: 'Zaiyat artışı ve kg/m³ limiti yaklaşan havuzları renkli uyarılarla anında fark edin.' },
+          { icon: '📦', title: 'Yem Sipariş Önerisi', desc: 'Mevcut stok ve tüketim hızına göre kaç kg yem sipariş etmeniz gerektiğini otomatik hesaplayın.' },
+          { icon: '📊', title: '20+ Rapor & Excel', desc: 'FCR, zaiyat, aylık performans, yemleme planı ve daha fazlasını Excel veya PDF olarak alın.' },
+        ]
+      },
+      mobile: {
+        title: 'HasAqua Fish Manager — Mobile',
+        subtitle: 'Mobil Tesis Yönetim Uygulaması · iOS & Android',
+        screenshots: [],
+        features: [
+          { icon: '📱', title: 'Sahada Veri Girişi', desc: 'Tesisin her köşesinden anlık yavru, zaiyat, yem ve ilaç girişi yapın.' },
+          { icon: '🔄', title: 'Gerçek Zamanlı Sync', desc: 'Masaüstü yazılımıyla anlık senkronizasyon. Ofiste ve sahada aynı veri.' },
+          { icon: '🔔', title: 'Anlık Bildirimler', desc: 'Stok alarmları, zaiyat uyarıları ve günlük kontrol hatırlatmaları cebinize gelir.' },
+          { icon: '🏊', title: 'Havuz Görüntüleme', desc: 'Tüm havuzların mevcut stok, biyokütle ve yoğunluk bilgilerini mobilde görün.' },
+          { icon: '📲', title: 'iOS & Android', desc: 'Her iki platformda da sorunsuz çalışır, internet bağlantısı olmadan da temel özellikler aktif.' },
+          { icon: '🔗', title: 'Fish Counter Entegrasyonu', desc: 'Kameralı sayım sonuçları doğrudan mobil uygulamaya aktarılır.' },
+        ]
+      },
+      counter: {
+        title: 'HasAqua Fish Counter',
+        subtitle: 'Kameralı Otomatik Balık Sayım Sistemi',
+        screenshots: [],
+        features: [
+          { icon: '🎥', title: 'Kamera Tabanlı Sayım', desc: 'Özel tasarım kamera ve donanım seti ile balıklar transfer sırasında otomatik sayılır.' },
+          { icon: '🤖', title: 'Yapay Zeka', desc: 'Görüntü işleme ve AI algoritmaları ile yüksek doğruluk oranı, insan hatası sıfır.' },
+          { icon: '⚡', title: 'Gerçek Zamanlı', desc: 'Sayım anlık olarak gerçekleşir, sonuçlar Fish Manager\'a otomatik aktarılır.' },
+          { icon: '🔧', title: 'Özel Donanım', desc: 'Tesis koşullarına göre tasarlanmış sağlam ve su geçirmez donanım seti.' },
+          { icon: '📋', title: 'Sayım Kayıtları', desc: 'Her sayım tarih, saat ve havuz bilgisiyle kayıt altına alınır.' },
+          { icon: '🔌', title: 'Kolay Kurulum', desc: 'Plug & play kurulum, teknik destek ve eğitim dahil.' },
+        ]
+      },
+      eggs: {
+        title: 'HasAqua Eggs Counter',
+        subtitle: 'Alabalık Yumurta Sayım Sistemi · Yakında',
+        screenshots: [],
+        features: [
+          { icon: '🥚', title: 'Otomatik Yumurta Sayımı', desc: 'Hassas optik sensörler ile yumurtalar hızlı ve doğru şekilde sayılır.' },
+          { icon: '⚙️', title: 'Özel Makine Tasarımı', desc: 'Alabalık yumurtaları için özel tasarlanmış mekanik sayım makinesi.' },
+          { icon: '📊', title: 'Parti Takibi', desc: 'Her partinin sayısı, tarihi ve kuluçka havuzu bilgisiyle kayıt altına alınır.' },
+          { icon: '🔗', title: 'Sistem Entegrasyonu', desc: 'Fish Manager ile tam entegrasyon, yumurta verisi otomatik sisteme işlenir.' },
+          { icon: '📅', title: 'Yakında Geliyor', desc: 'Geliştirme aşamasında. Ön kayıt için bizimle iletişime geçin.' },
+        ]
+      }
+    };
+
+    function openModal(type) {
+      const data = modalData[type];
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-subtitle').textContent = data.subtitle;
+
+      const ss = document.getElementById('modal-screenshots');
+      ss.innerHTML = '';
+      if (data.screenshots.length > 0) {
+        data.screenshots.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = data.title;
+          img.onclick = () => openLightbox(src);
+          ss.appendChild(img);
+        });
+      } else {
+        ss.style.display = 'none';
+      }
+
+      const feat = document.getElementById('modal-features');
+      feat.innerHTML = data.features.map(f => `
+        <div class="modal-feature">
+          <div class="modal-feature-icon">${f.icon}</div>
+          <h4>${f.title}</h4>
+          <p>${f.desc}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modal-overlay')) closeModalBtn();
+    }
+
+    function closeModalBtn() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      document.getElementById('modal-screenshots').style.display = 'flex';
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeModalBtn(); closeLightbox(); }
+    });
+  </script>
+</body>
+</html>

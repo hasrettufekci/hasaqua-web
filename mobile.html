@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HasAqua Fish Manager Mobile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0a1628;--accent:#00aaff;--accent2:#00d4aa;--text:#e8eef5;--text-muted:#8aa0b8;--card-bg:rgba(255,255,255,0.04);--card-border:rgba(0,170,255,0.15)}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{background:var(--navy);color:var(--text);font-family:'Source Sans 3',sans-serif;font-weight:300;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(0,100,200,0.18) 0%,transparent 70%);pointer-events:none;z-index:0}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:72px;background:rgba(10,22,40,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,170,255,0.1)}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{height:38px;width:38px;object-fit:contain;border-radius:8px}
+    .nav-logo-text{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:0.08em;color:var(--text)}
+    .nav-logo-text span{color:var(--accent)}
+    .nav-back{color:var(--text-muted);text-decoration:none;font-size:0.9rem;transition:color 0.2s}
+    .nav-back:hover{color:var(--accent)}
+
+    /* HERO - 3 mobil ekran görüntüsü yan yana */
+    .hero{position:relative;z-index:1;padding:120px 8% 80px;display:flex;align-items:center;gap:6%;min-height:90vh}
+    .hero-text{flex:1}
+    .tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:var(--accent2);font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:1.5rem}
+    .tag::before{content:'';width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+    .hero h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3.5rem);line-height:1.1;margin-bottom:1.25rem}
+    .hero h1 span{color:var(--accent)}
+    .hero p{color:var(--text-muted);font-size:1.1rem;line-height:1.8;margin-bottom:2rem;max-width:480px}
+    .btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-p{background:linear-gradient(135deg,var(--accent),#0077cc);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;padding:12px 28px;border-radius:8px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(0,170,255,0.3);display:inline-block}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,170,255,0.45)}
+    .btn-s{background:transparent;color:var(--text);font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.9rem;padding:12px 28px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:border-color 0.2s,background 0.2s;display:inline-block}
+    .btn-s:hover{border-color:var(--accent);background:rgba(0,170,255,0.08)}
+
+    /* 3 mobil ekran yan yana hero görseli */
+    .hero-phones{flex:1;display:flex;gap:16px;align-items:flex-end;justify-content:center}
+    .hero-phones img{width:30%;border-radius:24px;border:1px solid rgba(0,170,255,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.5);cursor:zoom-in;transition:transform 0.3s}
+    .hero-phones img:nth-child(2){transform:translateY(-20px)}
+    .hero-phones img:hover{transform:scale(1.04) translateY(-5px)!important}
+
+    /* FEATURE ROWS */
+    .section{position:relative;z-index:1;padding:80px 8%}
+    .section.alt{background:rgba(255,255,255,0.02)}
+    .row{display:flex;align-items:center;gap:6%;margin-bottom:90px}
+    .row:last-child{margin-bottom:0}
+    .row.rev{flex-direction:row-reverse}
+    .row-text{flex:1}
+
+    /* Mobil ekran görseli - telefon çerçevesinde göster */
+    .row-phones{flex:1;display:flex;gap:12px;align-items:center;justify-content:center}
+    .row-phones img{width:45%;border-radius:20px;border:1px solid rgba(0,170,255,0.2);box-shadow:0 20px 50px rgba(0,0,0,0.45);cursor:zoom-in;transition:transform 0.3s}
+    .row-phones img:hover{transform:scale(1.04)}
+    .row-phones.single img{width:55%}
+
+    .badge{display:inline-block;background:rgba(0,170,255,0.1);color:var(--accent);font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:1rem}
+    .row-text h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.2;margin-bottom:1rem}
+    .row-text p{color:var(--text-muted);font-size:1rem;line-height:1.8;margin-bottom:1.5rem}
+    ul.flist{list-style:none;display:flex;flex-direction:column;gap:10px}
+    ul.flist li{display:flex;align-items:flex-start;gap:10px;font-size:0.95rem;color:var(--text-muted);line-height:1.5}
+    ul.flist li::before{content:'✓';color:var(--accent2);font-weight:700;font-size:0.85rem;margin-top:2px;flex-shrink:0}
+
+    /* GRID */
+    .grid-section{position:relative;z-index:1;padding:80px 8%;background:rgba(255,255,255,0.02)}
+    .sec-head{text-align:center;margin-bottom:50px}
+    .sec-label{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+    .sec-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem)}
+    .divider{width:50px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin:1rem auto 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;max-width:1100px;margin:0 auto}
+    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:1.5rem;transition:transform 0.3s,border-color 0.3s}
+    .card:hover{transform:translateY(-4px);border-color:rgba(0,170,255,0.35)}
+    .card-icon{font-size:1.6rem;margin-bottom:0.75rem}
+    .card h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:0.5rem}
+    .card p{color:var(--text-muted);font-size:0.85rem;line-height:1.6}
+    .cta{position:relative;z-index:1;text-align:center;padding:80px 5%;background:linear-gradient(135deg,rgba(0,100,200,0.12),rgba(0,212,170,0.08))}
+    .cta h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:1rem}
+    .cta p{color:var(--text-muted);margin-bottom:2rem;font-size:1.05rem}
+    footer{position:relative;z-index:1;text-align:center;padding:2rem 5%;border-top:1px solid rgba(255,255,255,0.06);color:var(--text-muted);font-size:0.85rem}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;opacity:0;pointer-events:none;transition:opacity 0.2s}
+    .lightbox.open{opacity:1;pointer-events:all}
+    .lightbox img{max-width:100%;max-height:90vh;border-radius:8px}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:rgba(0,170,255,0.3);border-radius:3px}
+    @media(max-width:768px){.hero,.row,.row.rev{flex-direction:column;padding:100px 5% 60px}.hero-phones{width:100%}.row-phones{width:100%}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.jpg" alt="HasAqua"/>
+    <span class="nav-logo-text">HAS<span>AQUA</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Tüm Ürünler</a>
+</nav>
+
+<!-- HERO: 3 ana ekran yan yana -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="tag">Aktif · Android</div>
+    <h1>Fish Manager<br><span>Mobile</span></h1>
+    <p>Tesis yönetimini cebinize taşıyın. Masaüstü yazılımıyla tam entegre, sahadaki her noktadan anlık veri girişi, alarm takibi ve stok analizi.</p>
+    <div class="btns">
+      <a href="index.html#iletisim" class="btn-p">Demo Talep Et</a>
+      <a href="#ozellikler" class="btn-s">Özellikleri İncele</a>
+    </div>
+  </div>
+  <div class="hero-phones">
+    <img src="images/m-anaekran1.png" alt="Ana Ekran 1" onclick="lb(this.src)"/>
+    <img src="images/m-anaekran2.png" alt="Ana Ekran 2" onclick="lb(this.src)"/>
+    <img src="images/m-anaekran3.png" alt="Ana Ekran 3" onclick="lb(this.src)"/>
+  </div>
+</div>
+
+<div class="section" id="ozellikler">
+
+  <!-- Açılış uyarısı + Zaiyat alarmı -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Anlık Bildirimler</div>
+      <h2>Açılışta Zaiyat Uyarısı —<br>Hiçbir Şeyi Kaçırma</h2>
+      <p>Uygulama her açılışta zaiyat artışı tespit edilen havuzları anında gösterir. Hangi havuzda ne kadar artış olduğunu görüp tek tıkla detaya ulaşabilirsiniz.</p>
+      <ul class="flist">
+        <li>Açılışta otomatik zaiyat artışı kontrolü</li>
+        <li>Havuz bazlı artış yüzdesi gösterimi</li>
+        <li>"Detay Gör" ile ilgili havuza direkt geçiş</li>
+        <li>Zaiyat alarmı: kritik ve uyarı seviyeleri</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-acilisuyari.png" alt="Açılış Uyarısı" onclick="lb(this.src)"/>
+      <img src="images/m-zayiatalarm.png" alt="Zaiyat Alarmı" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- Ana stok raporu + Havuz detay -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">Stok Takibi</div>
+      <h2>Ana Stok Raporu &<br>Havuz Detay</h2>
+      <p>Tüm blok ve havuzların adet, ortalama gram, kg ve yoğunluk bilgilerini mobilden görün. Havuza tıklayınca günlük yem önerisi, son 30 gün özeti ve gramaj geçmişine ulaşın.</p>
+      <ul class="flist">
+        <li>Blok bazlı gruplama ve filtreleme</li>
+        <li>Toplam adet ve biyokütle özeti</li>
+        <li>Havuz detayında günlük yem önerisi</li>
+        <li>Gramaj geçmişi ve risk skoru</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-anastokrapor.png" alt="Ana Stok Raporu" onclick="lb(this.src)"/>
+      <img src="images/m-havuzdetay.png" alt="Havuz Detay" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- Toplu yem + Toplu zaiyat -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Hızlı Veri Girişi</div>
+      <h2>Toplu Yem & Zaiyat Girişi —<br>Sahadaki En Hızlı Yol</h2>
+      <p>Blok seçerek tüm havuzlara yem veya zaiyat girişini tek ekranda yapın. Yem miktarı gramaja göre otomatik önerilir, siz sadece onaylarsınız.</p>
+      <ul class="flist">
+        <li>Blok bazlı toplu yem girişi</li>
+        <li>Gramaja göre otomatik yem önerisi</li>
+        <li>Toplu zaiyat: kg veya adet modunda giriş</li>
+        <li>Tek tuşla kaydet</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-topluyem.png" alt="Toplu Yem Girişi" onclick="lb(this.src)"/>
+      <img src="images/m-topluzayiat.png" alt="Toplu Zaiyat Girişi" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- Günlük kontrol + Risk skoru -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">Kontrol & Risk</div>
+      <h2>Günlük Kontrol &<br>Havuz Risk Skoru</h2>
+      <p>Yem stoğu kritik seviyeleri, sipariş önerileri ve zaiyat alarmlarını tek ekranda takip edin. Havuz risk skoru doluluk, zaiyat ve FCR verilerini birleştirerek her havuzu puanlar.</p>
+      <ul class="flist">
+        <li>Yem, aşı, ilaç stok uyarıları</li>
+        <li>Sipariş önerisi bildirimi</li>
+        <li>Risk skoru: Yüksek / Orta / Düşük</li>
+        <li>Doluluk, zaiyat ve FCR bazlı puanlama</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-gunlukkontrol.png" alt="Günlük Kontrol" onclick="lb(this.src)"/>
+      <img src="images/m-riskskor.png" alt="Risk Skoru" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- Yem stok + Yem ihtiyaç -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Yem Yönetimi</div>
+      <h2>Yem Stok & İhtiyaç Tahmini —<br>Stok Tükenmeden Harekete Geç</h2>
+      <p>Mevcut yem stoklarını limit çubuklarıyla görün. Yem ihtiyaç tahmini ekranı, 15/30/45 günlük periyotlar için toplam ihtiyacı ve sipariş gereken yem sayısını hesaplar.</p>
+      <ul class="flist">
+        <li>Görsel stok doluluk çubukları</li>
+        <li>Kritik stoklar kırmızı ile işaretlenir</li>
+        <li>15/30/45 günlük ihtiyaç tahmini</li>
+        <li>Sipariş gereken yem sayısı ve miktarı</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-yemstok.png" alt="Yem Stok" onclick="lb(this.src)"/>
+      <img src="images/m-yemihtiyac.png" alt="Yem İhtiyaç" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- Sipariş önerisi + Havuz hareketi -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">İşlemler</div>
+      <h2>Sipariş Önerisi &<br>Havuz Hareketleri</h2>
+      <p>Tüketim verilerine göre otomatik sipariş önerisi alın. Transfer, boylama ve aşılama işlemlerini mobilden kaydedin, son hareketleri listede görün.</p>
+      <ul class="flist">
+        <li>Otomatik sipariş önerisi (marka & miktar)</li>
+        <li>Transfer: kaynak → hedef havuz seçimi</li>
+        <li>Boylama ve aşılama kayıtları</li>
+        <li>Son hareketler listesi</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-siparisoneri.png" alt="Sipariş Önerisi" onclick="lb(this.src)"/>
+      <img src="images/m-havuzhareket.png" alt="Havuz Hareketi" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- FCR + Zaiyat raporu -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Raporlar</div>
+      <h2>Tesis FCR & Zaiyat Raporu —<br>Her Şey Cepte</h2>
+      <p>Yıllık FCR özetini ve aylık kırılımı mobilden görün. Zaiyat raporunda 7/15/30/90 günlük dönem seçerek blok ve havuz bazlı kayıpları analiz edin.</p>
+      <ul class="flist">
+        <li>2026 yıllık FCR özeti (toplam yem, hasat, zaiyat)</li>
+        <li>Aylık detay tablosu</li>
+        <li>Zaiyat raporu: 7/15/30/90 gün</li>
+        <li>Blok & havuz bazlı zaiyat kırılımı</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-fcr.png" alt="FCR Raporu" onclick="lb(this.src)"/>
+      <img src="images/m-zayiatrapor.png" alt="Zaiyat Raporu" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- Gramaj + Toplu ortalama -->
+  <div class="row rev">
+    <div class="row-text">
+      <div class="badge">Gramaj & Ortalama</div>
+      <h2>Gramaj Raporu &<br>Toplu Ortalama Girişi</h2>
+      <p>Tüm stoku gram aralıklarına göre gruplandırın. Hangi gram aralığında kaç balık olduğunu görmek için gramaj raporunu kullanın. Toplu ortalama girişiyle boylama verilerini hızlıca kaydedin.</p>
+      <ul class="flist">
+        <li>Gram aralığına göre stok gruplandırma</li>
+        <li>Her aralıktaki havuzlar ve adet/kg bilgisi</li>
+        <li>Toplu ortalama: gram ve adet gir, ortalama otomatik hesaplanır</li>
+        <li>Blok seçerek tüm havuzlara toplu giriş</li>
+      </ul>
+    </div>
+    <div class="row-phones">
+      <img src="images/m-gramajrapor.png" alt="Gramaj Raporu" onclick="lb(this.src)"/>
+      <img src="images/m-topluortalama.png" alt="Toplu Ortalama" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+  <!-- Ayarlar tek ekran -->
+  <div class="row">
+    <div class="row-text">
+      <div class="badge">Bağlantı & Yedek</div>
+      <h2>Ayarlar — Sunucu Bağlantısı<br>& Veritabanı Yedeği</h2>
+      <p>Mobil uygulamayı masaüstü yazılımına WiFi veya Cloudflare Tunnel üzerinden bağlayın. Tek tıkla veritabanını yedekleyin, son yedek tarihi ekranda görünür.</p>
+      <ul class="flist">
+        <li>WiFi (yerel ağ) veya Cloudflare Tunnel bağlantısı</li>
+        <li>Bağlantı testi butonu</li>
+        <li>Tek tıkla veritabanı yedekleme</li>
+        <li>Son yedek tarihi ve saati gösterimi</li>
+      </ul>
+    </div>
+    <div class="row-phones single">
+      <img src="images/m-ayarlar.png" alt="Ayarlar" onclick="lb(this.src)"/>
+    </div>
+  </div>
+
+</div>
+
+<!-- GRID -->
+<div class="grid-section">
+  <div class="sec-head">
+    <div class="sec-label">Tüm Özellikler</div>
+    <h2 class="sec-title">Sahada İhtiyacın Her Şey</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-icon">🔄</div><h4>Masaüstü Senkronizasyon</h4><p>WiFi veya Cloudflare Tunnel ile masaüstü yazılımıyla anlık senkronizasyon.</p></div>
+    <div class="card"><div class="card-icon">🔔</div><h4>Anlık Bildirimler</h4><p>Zaiyat artışı, stok alarmı ve sipariş önerileri anında bildirim olarak gelir.</p></div>
+    <div class="card"><div class="card-icon">📱</div><h4>Android</h4><p>Android cihazlarda sorunsuz çalışır.</p></div>
+    <div class="card"><div class="card-icon">⚡</div><h4>Hızlı Veri Girişi</h4><p>Toplu yem, zaiyat ve ortalama girişi tek ekranda, minimum dokunuşla.</p></div>
+    <div class="card"><div class="card-icon">📊</div><h4>Mobil Raporlar</h4><p>FCR, zaiyat, gramaj ve stok raporlarına her yerden erişim.</p></div>
+    <div class="card"><div class="card-icon">🛡️</div><h4>Güvenli Bağlantı</h4><p>Cloudflare Tunnel ile internet üzerinden şifreli ve güvenli bağlantı.</p></div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>Tesisinizi Cebinize Taşıyın</h2>
+  <p>Demo talebi veya kurulum bilgisi için iletişime geçin.</p>
+  <a href="index.html#iletisim" class="btn-p">Demo Talep Et</a>
+</div>
+<footer><p>© 2026 HasAqua — Tüm hakları saklıdır.</p></footer>
+<div class="lightbox" id="lb" onclick="closeLb()"><img id="lbi" src="" alt=""/></div>
+<script>
+  function lb(src){document.getElementById('lbi').src=src;document.getElementById('lb').classList.add('open')}
+  function closeLb(){document.getElementById('lb').classList.remove('open')}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()})
+</script>
+</body>
+</html>
