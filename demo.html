@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HasAqua — Demo İndir & Kurulum</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNH87KB10N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NNH87KB10N');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy2: #0d1f3c;
+      --blue: #1a4a7a;
+      --accent: #00aaff;
+      --accent2: #00d4aa;
+      --gold: #f0a500;
+      --text: #e8eef5;
+      --text-muted: #8aa0b8;
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(0,170,255,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,100,200,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 90% 80%, rgba(0,212,170,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,170,255,0.1);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 42px; width: 42px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+
+    .nav-logo-text span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--navy) !important;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: #33bbff !important;
+      transform: translateY(-1px);
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 5% 70px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,170,255,0.1);
+      border: 1px solid rgba(0,170,255,0.3);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      animation: fadeDown 0.8s 0.1s ease both;
+    }
+
+    .hero h1 .line1 { display: block; color: var(--text); }
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: fadeDown 0.8s 0.2s ease both;
+    }
+
+    .version-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .vpill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .vpill strong { color: var(--accent2); font-weight: 600; }
+
+    /* ── SECTION ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 80px 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin-top: 1rem;
+    }
+
+    /* ── PLATFORM TABS ── */
+    #demo {
+      background: rgba(255,255,255,0.015);
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .platform-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-muted);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all .22s;
+    }
+
+    .tab-btn:hover {
+      border-color: rgba(0,170,255,0.4);
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--navy);
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(0,170,255,0.35);
+    }
+
+    /* ── PANELS ── */
+    .panel { display: none; animation: fadeIn .3s ease; }
+    .panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── CARDS ── */
+    .dl-card, .steps-card, .full-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .dl-card::before, .steps-card::before, .full-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .dl-card:hover, .steps-card:hover {
+      border-color: rgba(0,170,255,0.35);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    }
+
+    .full-card {
+      grid-column: 1 / -1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .platform-icon {
+      width: 50px; height: 50px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .icon-blue  { background: rgba(0,170,255,0.15); }
+    .icon-apple { background: rgba(100,150,255,0.15); }
+    .icon-droid { background: rgba(0,212,170,0.2); }
+
+    .card-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .ver-line {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ver-badge {
+      background: rgba(0,212,170,0.15);
+      color: var(--accent2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .req-list {
+      list-style: none;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 22px;
+    }
+
+    .req-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .req-list li::before {
+      content: '✓';
+      color: var(--accent2);
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* ── DOWNLOAD BUTTONS ── */
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 13px 22px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .dl-btn-primary {
+      background: linear-gradient(135deg, var(--accent), #0077cc);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0,170,255,0.3);
+    }
+
+    .dl-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,170,255,0.45); }
+
+    .dl-btn-apple {
+      background: linear-gradient(135deg, #5B8AFF, #3355DD);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(80,120,255,0.3);
+    }
+
+    .dl-btn-apple:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(80,120,255,0.45); }
+
+    .dl-btn-android {
+      background: linear-gradient(135deg, var(--accent2), #009977);
+      color: var(--navy);
+      box-shadow: 0 4px 20px rgba(0,212,170,0.25);
+    }
+
+    .dl-btn-android:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,212,170,0.4); }
+
+    /* ── NOTE ── */
+    .note {
+      margin-top: 16px;
+      background: rgba(0,212,170,0.06);
+      border: 1px solid rgba(0,212,170,0.2);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 0.84rem;
+      color: var(--accent2);
+      line-height: 1.55;
+    }
+
+    .note strong { display: block; margin-bottom: 3px; font-weight: 600; }
+
+    /* ── STEPS ── */
+    .steps-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 22px;
+    }
+
+    .steps { display: flex; flex-direction: column; }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      padding-bottom: 18px;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(0,170,255,0.1);
+      border: 1.5px solid rgba(0,170,255,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .step-connector {
+      width: 1px;
+      flex: 1;
+      background: linear-gradient(to bottom, rgba(0,170,255,0.25), transparent);
+      margin-top: 5px;
+    }
+
+    .step:last-child .step-connector { display: none; }
+
+    .step-body { padding-top: 4px; }
+
+    .step-body h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .step-body p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .step-body code {
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: rgba(0,170,255,0.1);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 1px 6px;
+    }
+
+    /* ── TESTFLIGHT SPECIAL ── */
+    .tf-banner {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(91,138,255,0.12), rgba(0,170,255,0.06));
+      border: 1px solid rgba(91,138,255,0.3);
+      border-radius: 16px;
+      padding: 30px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tf-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #5B8AFF, var(--accent));
+    }
+
+    .tf-text h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .tf-text p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 440px;
+      line-height: 1.6;
+    }
+
+    .tf-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(91,138,255,0.12);
+      border: 1px solid rgba(91,138,255,0.25);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.78rem;
+      color: #7AAAFF;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .tf-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .tf-note {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* ── SYNC GRID ── */
+    .sync-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .sync-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .sync-box .sn {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .sync-box h4 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .sync-box p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ── CONTACT ── */
+    #destek {
+      background: rgba(255,255,255,0.015);
+    }
+
+    .contact-box {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem 2rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .contact-item:hover {
+      border-color: rgba(0,170,255,0.4);
+      transform: translateY(-3px);
+    }
+
+    .contact-item-icon { font-size: 1.5rem; }
+
+    .contact-item-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+
+    .contact-item-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 40px 5%;
+      text-align: center;
+      border-top: 1px solid rgba(0,170,255,0.1);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 760px) {
+      .panel-grid { grid-template-columns: 1fr; }
+      .tf-banner { flex-direction: column; }
+      .tf-actions { align-items: stretch; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="images/logo.jpg" alt="HasAqua Logo" />
+    <span class="nav-logo-text">HAS<span>AQUA</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#urunler">Ürünler</a></li>
+    <li><a href="index.html#ozellikler">Özellikler</a></li>
+    <li><a href="#destek">Destek</a></li>
+    <li><a href="index.html#iletisim" class="nav-cta">Bize Ulaşın</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Demo İndir</div>
+  <h1>
+    <span class="line1">Yazılımı Dene,</span>
+    <span class="line2">Tesisini Dijitalleştir</span>
+  </h1>
+  <p class="hero-sub">HasAqua Fish Manager'ı ücretsiz dene. Windows masaüstü, iOS ve Android destekli — kurulum 5 dakika.</p>
+  <div class="version-pills">
+    <div class="vpill">🖥️ Desktop <strong>v1.2.0</strong></div>
+    <div class="vpill">🍎 iOS <strong>v1.0.3 Beta</strong></div>
+    <div class="vpill">🤖 Android <strong>v1.0.3</strong></div>
+  </div>
+</div>
+
+<!-- DEMO SECTION -->
+<section id="demo">
+  <div class="demo-header">
+    <div class="section-label">Platform Seç</div>
+    <h2 class="section-title">Demo İndir & Kurulum</h2>
+    <div class="divider" style="margin: 1rem auto 0;"></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="platform-tabs">
+    <button class="tab-btn active" onclick="showPanel('desktop', this)">🖥️ &nbsp;Windows Desktop</button>
+    <button class="tab-btn" onclick="showPanel('ios', this)">🍎 &nbsp;iOS — TestFlight</button>
+    <button class="tab-btn" onclick="showPanel('android', this)">🤖 &nbsp;Android</button>
+  </div>
+
+  <!-- DESKTOP -->
+  <div class="panel active" id="panel-desktop">
+    <div class="panel-grid">
+
+      <div class="dl-card">
+        <div class="card-header">
+          <div class="platform-icon icon-blue">🖥️</div>
+          <div>
+            <h2>Fish Manager Desktop</h2>
+            <div class="ver-line">Windows 10/11 · <span class="ver-badge">v1.2.0</span></div>
+          </div>
+        </div>
+        <ul class="req-list">
+          <li>Windows 10 veya 11 (64-bit)</li>
+          <li>En az 4 GB RAM</li>
+          <li>500 MB boş disk alanı</li>
+          <li>.NET 6.0 Runtime (kurulumda otomatik gelir)</li>
+        </ul>
+        <a href="#" class="dl-btn dl-btn-primary">⬇️ &nbsp;Demo İndir (.exe)</a>
+        <div class="note">
+          <strong>📝 Demo hakkında</strong>
+          Tüm modüller açık, 30 günlük deneme süresiyle çalışır. Lisans aktivasyonu için info@hasaqua.com adresine ulaşın.
+        </div>
+      </div>
+
+      <div class="steps-card">
+        <div class="steps-title">⚙️ Kurulum Adımları</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Kurulum dosyasını indir</h4>
+              <p><code>HasAqua_Setup_v1.2.0.exe</code> dosyasını indirin.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Yönetici olarak çalıştır</h4>
+              <p>İndirilen dosyaya sağ tıklayıp "Yönetici olarak çalıştır" seçin.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Kurulum sihirbazını takip et</h4>
+              <p>İleri → İleri → Kur adımlarını tamamlayın. .NET gerekirse otomatik yüklenir.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Demo modunu başlat</h4>
+              <p>İlk açılışta "Demo Modunda Başlat" butonuna tıklayın. Lisans gerekmez.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">5</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Tesis bilgilerini gir</h4>
+              <p>Tesis adı, havuz sayısı ve başlangıç stoğunu girerek kullanıma başlayın.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- IOS -->
+  <div class="panel" id="panel-ios">
+    <div class="panel-grid">
+
+      <div class="tf-banner">
+        <div class="tf-text">
+          <h3>🍎 iOS için TestFlight Beta</h3>
+          <p>iPhone ve iPad'inizde HasAqua Fish Manager uygulamasını TestFlight üzerinden ücretsiz test edin. App Store'a girmeden önce tam özellikli beta sürümü.</p>
+          <div class="tf-pill">🔒 Apple TestFlight · Güvenli &amp; Ücretsiz</div>
+        </div>
+        <div class="tf-actions">
+          <a href="https://testflight.apple.com/join/XXXXXXXX" class="dl-btn dl-btn-apple" style="min-width:220px;">🍎 &nbsp;TestFlight'a Katıl</a>
+          <span class="tf-note">iOS 15.0+ gereklidir</span>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="card-header">
+          <div class="platform-icon icon-apple">🍎</div>
+          <div>
+            <h2>Fish Manager Mobile</h2>
+            <div class="ver-line">iOS 15.0+ · <span class="ver-badge">v1.0.3 Beta</span></div>
+          </div>
+        </div>
+        <ul class="req-list">
+          <li>iPhone veya iPad (iOS 15.0+)</li>
+          <li>TestFlight uygulaması gerekli</li>
+          <li>Desktop ile gerçek zamanlı senkronizasyon</li>
+          <li>Aktif internet bağlantısı (sync için)</li>
+        </ul>
+        <div class="note">
+          <strong>ℹ️ TestFlight nedir?</strong>
+          Apple'ın resmi beta test platformudur. Mevcut App Store hesabınızla çalışır, ücret alınmaz.
+        </div>
+      </div>
+
+      <div class="steps-card">
+        <div class="steps-title">📲 TestFlight Kurulum Adımları</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>TestFlight'ı indir</h4>
+              <p>iPhone'unuzda App Store'dan <strong>TestFlight</strong> uygulamasını ücretsiz indirin.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Davet bağlantısına dokun</h4>
+              <p>Yukarıdaki "TestFlight'a Katıl" butonuna iPhone'unuzdan dokunun.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Uygulamayı yükle</h4>
+              <p>TestFlight açılınca HasAqua'nın yanındaki "Yükle" butonuna dokunun.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Demo olarak başlat</h4>
+              <p>Uygulama açıldıktan sonra "Demo Olarak Devam Et" seçeneğini kullanın.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ANDROID -->
+  <div class="panel" id="panel-android">
+    <div class="panel-grid">
+
+      <div class="dl-card">
+        <div class="card-header">
+          <div class="platform-icon icon-droid">🤖</div>
+          <div>
+            <h2>Fish Manager Android</h2>
+            <div class="ver-line">Android 8.0+ · <span class="ver-badge">v1.0.3</span> · APK</div>
+          </div>
+        </div>
+        <ul class="req-list">
+          <li>Android 8.0 (Oreo) veya üzeri</li>
+          <li>En az 2 GB RAM</li>
+          <li>100 MB boş depolama alanı</li>
+          <li>"Bilinmeyen kaynaklara izin ver" ayarı</li>
+        </ul>
+        <a href="#" class="dl-btn dl-btn-android">⬇️ &nbsp;APK İndir (Android)</a>
+        <div class="note">
+          <strong>🔜 Yakında Google Play'de</strong>
+          Uygulama Google Play mağazasına yüklenme aşamasında. Şu an APK kurulumu yapılabilir.
+        </div>
+      </div>
+
+      <div class="steps-card">
+        <div class="steps-title">⚙️ APK Kurulum Adımları</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>APK dosyasını indir</h4>
+              <p>Soldaki butona dokunun ve <code>HasAqua_v1.0.3.apk</code> dosyasını indirin.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Bilinmeyen kaynağa izin ver</h4>
+              <p>Ayarlar → Güvenlik → "Bilinmeyen kaynaklardan yükle" seçeneğini açın.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>APK'ya dokun ve yükle</h4>
+              <p>Dosya yöneticisinden indirilen APK'ya dokunup "Yükle" deyin.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div>
+            <div class="step-body">
+              <h4>Demo olarak başlat</h4>
+              <p>Yükleme tamamlanınca "Aç" butonuna dokunun, demo modunda çalıştırın.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-card">
+        <div class="steps-title">🔄 Desktop ile Senkronizasyon</div>
+        <div class="sync-grid">
+          <div class="sync-box">
+            <div class="sn">Adım 1</div>
+            <h4>Aynı ağa bağlan</h4>
+            <p>Telefon ve bilgisayar aynı Wi-Fi ağında olmalıdır.</p>
+          </div>
+          <div class="sync-box">
+            <div class="sn">Adım 2</div>
+            <h4>Sunucu IP'sini gir</h4>
+            <p>Desktop'taki IP adresini mobil uygulama ayarlarına girin.</p>
+          </div>
+          <div class="sync-box">
+            <div class="sn">Adım 3</div>
+            <h4>Eşleştir</h4>
+            <p>Mobilde "Sunucuya Bağlan" butonuna basın ve oturumu başlatın.</p>
+          </div>
+          <div class="sync-box">
+            <div class="sn">Adım 4</div>
+            <h4>Anlık senkronizasyon</h4>
+            <p>Veriler her iki platformda otomatik olarak güncellenir.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="destek">
+  <div style="text-align:center; margin-bottom:16px;">
+    <div class="section-label">Teknik Destek</div>
+    <h2 class="section-title">Kurulumda Takıldın mı?</h2>
+    <p style="color:var(--text-muted); margin-top:0.75rem; font-size:1.05rem;">Demo kurulumu, lisans aktivasyonu veya teknik sorunlar için bize ulaşın.</p>
+    <div class="divider" style="margin: 1rem auto 0;"></div>
+  </div>
+  <div class="contact-box">
+    <a href="mailto:info@hasaqua.com" class="contact-item">
+      <div class="contact-item-icon">✉️</div>
+      <div>
+        <div class="contact-item-label">E-Posta</div>
+        <div class="contact-item-value">info@hasaqua.com</div>
+      </div>
+    </a>
+    <a href="tel:+905317933693" class="contact-item">
+      <div class="contact-item-icon">📞</div>
+      <div>
+        <div class="contact-item-label">Telefon</div>
+        <div class="contact-item-value">+90 531 793 36 93</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 HasAqua — Tüm hakları saklıdır. &nbsp;·&nbsp; <a href="index.html">Ana Sayfaya Dön</a></p>
+  <p style="margin-top:6px; font-size:0.8rem;">Akıllı Su Ürünleri Çözümleri · Balık Sayım · Tesis Yönetimi · Üretim Teknolojisi</p>
+</footer>
+
+<script>
+  function showPanel(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
