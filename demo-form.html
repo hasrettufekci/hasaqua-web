@@ -112,13 +112,8 @@
   <p>© 2026 HasAqua &nbsp;·&nbsp; <a href="index.html">Ana Sayfa</a> &nbsp;·&nbsp; <a href="demo.html">Demo</a></p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  // EmailJS başlat — kendi Public Key'ini buraya yaz
-  emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
-
-  // Google Sheets webhook URL — Apps Script deploy URL'i buraya gelecek
-  const SHEETS_URL = 'YOUR_APPS_SCRIPT_URL';
+  const FORMSPREE_URL = 'https://formspree.io/f/meebegrk';
 
   async function handleSubmit() {
     const ad      = document.getElementById('ad').value.trim();
@@ -129,7 +124,6 @@
     const err     = document.getElementById('errMsg');
     const btn     = document.getElementById('submitBtn');
 
-    // Validasyon
     if (!ad || !soyad || !firma || !telefon || !eposta) {
       err.textContent = 'Lütfen tüm alanları doldurun.';
       err.classList.add('show');
@@ -145,23 +139,19 @@
     btn.textContent = '⏳  Gönderiliyor...';
 
     const tarih = new Date().toLocaleString('tr-TR');
-    const params = { ad, soyad, firma, telefon, eposta, tarih };
 
     try {
-      // 1) E-posta gönder
-      await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params);
-
-      // 2) Google Sheets'e kaydet
-      await fetch(SHEETS_URL, {
+      const res = await fetch(FORMSPREE_URL, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(params)
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ ad, soyad, firma, telefon, eposta, tarih })
       });
 
-      // 3) Teşekkür sayfasına yönlendir
-      window.location.href = 'demo-tesekkur.html';
-
+      if (res.ok) {
+        window.location.href = 'demo-tesekkur.html';
+      } else {
+        throw new Error('Formspree error');
+      }
     } catch(e) {
       btn.disabled = false;
       btn.textContent = '⬇️  Demo\'yu İndir';
