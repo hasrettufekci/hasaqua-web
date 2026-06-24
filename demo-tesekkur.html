@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HasAqua — Teşekkürler!</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNH87KB10N"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NNH87KB10N');</script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#0a1628;--accent:#00aaff;--accent2:#00d4aa;--text:#e8eef5;--text-muted:#8aa0b8;--card-bg:rgba(255,255,255,0.04);--card-border:rgba(0,170,255,0.15)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--navy);color:var(--text);font-family:'Source Sans 3',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(0,100,200,0.18) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 90% 80%,rgba(0,212,170,0.08) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:72px;background:rgba(10,22,40,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,170,255,0.1)}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .nav-logo img{height:42px;width:42px;object-fit:contain;border-radius:8px}
+    .nav-logo-text{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:0.08em;color:var(--text)}
+    .nav-logo-text span{color:var(--accent)}
+
+    main{position:relative;z-index:1;flex:1;display:flex;align-items:center;justify-content:center;padding:110px 20px 60px;text-align:center}
+
+    .wrap{max-width:560px;width:100%}
+
+    .check-circle{width:80px;height:80px;background:linear-gradient(135deg,var(--accent2),#009977);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 2rem;box-shadow:0 8px 32px rgba(0,212,170,0.35);animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both}
+    @keyframes popIn{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+
+    h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;margin-bottom:1rem;animation:fadeUp 0.6s 0.2s ease both}
+    h1 span{color:var(--accent2)}
+    .sub{color:var(--text-muted);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;animation:fadeUp 0.6s 0.3s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+    .dl-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:28px;position:relative;overflow:hidden;animation:fadeUp 0.6s 0.4s ease both}
+    .dl-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+
+    .dl-info{display:flex;align-items:center;gap:14px;margin-bottom:20px;text-align:left}
+    .dl-icon{width:48px;height:48px;background:rgba(0,170,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .dl-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:3px}
+    .dl-meta{font-size:0.8rem;color:var(--text-muted)}
+    .dl-meta span{background:rgba(0,212,170,0.15);color:var(--accent2);border-radius:4px;padding:2px 7px;font-weight:600;margin-right:6px}
+
+    .dl-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#0077cc);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.04em;border-radius:8px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(0,170,255,0.3)}
+    .dl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,170,255,0.45)}
+
+    .steps{margin-top:20px;text-align:left}
+    .steps-title{font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+    .step{display:flex;gap:10px;margin-bottom:10px;font-size:0.85rem;color:var(--text-muted);align-items:flex-start}
+    .sn{width:20px;height:20px;background:rgba(0,170,255,0.1);border:1px solid rgba(0,170,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--accent);flex-shrink:0;margin-top:1px}
+
+    .contact-note{margin-top:2rem;font-size:0.85rem;color:var(--text-muted);animation:fadeUp 0.6s 0.5s ease both}
+    .contact-note a{color:var(--accent);text-decoration:none}
+    .contact-note a:hover{text-decoration:underline}
+
+    footer{position:relative;z-index:1;text-align:center;padding:20px;border-top:1px solid rgba(0,170,255,0.1);color:var(--text-muted);font-size:0.82rem}
+    footer a{color:var(--accent);text-decoration:none}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="images/logo.jpg" alt="HasAqua Logo"/>
+    <span class="nav-logo-text">HAS<span>AQUA</span></span>
+  </a>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="check-circle">✓</div>
+    <h1>Teşekkürler!<br><span>İndirme Hazır</span></h1>
+    <p class="sub">Bilgileriniz alındı. Aşağıdaki butona tıklayarak HasAqua Fish Manager Demo'yu indirmeye başlayabilirsiniz.</p>
+
+    <div class="dl-card">
+      <div class="dl-info">
+        <div class="dl-icon">🖥️</div>
+        <div>
+          <div class="dl-title">HasAqua Fish Manager Desktop</div>
+          <div class="dl-meta"><span>v1.2.0</span> Windows 10/11 · 64-bit · 15 Günlük Demo</div>
+        </div>
+      </div>
+
+      <a href="https://drive.google.com/uc?export=download&id=1xng3Ebqgw3dk1QfT-1d0fJ8jUcSPQzzq" class="dl-btn">
+        ⬇️ &nbsp;İndirmeyi Başlat
+      </a>
+
+      <div class="steps">
+        <div class="steps-title">⚙️ Kurulum Adımları</div>
+        <div class="step"><div class="sn">1</div><span>İndirilen <code style="background:rgba(0,170,255,0.1);color:var(--accent);padding:1px 5px;border-radius:3px;font-size:0.8rem">HasAqua_Setup.exe</code> dosyasına sağ tıklayın</span></div>
+        <div class="step"><div class="sn">2</div><span>"Yönetici olarak çalıştır" seçin ve kurulum sihirbazını takip edin</span></div>
+        <div class="step"><div class="sn">3</div><span>İlk açılışta "Demo Modunda Başlat" butonuna tıklayın, lisans gerekmez</span></div>
+        <div class="step"><div class="sn">4</div><span>15 günlük demo süresini tesis bilgilerinizi girerek değerlendirin</span></div>
+      </div>
+    </div>
+
+    <p class="contact-note">
+      Kurulumda takıldınız mı? &nbsp;<a href="mailto:info@hasaqua.com">info@hasaqua.com</a> adresine yazın veya <a href="tel:+905317933693">+90 531 793 36 93</a> numaralı hattı arayın.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 HasAqua &nbsp;·&nbsp; <a href="index.html">Ana Sayfa</a> &nbsp;·&nbsp; <a href="demo.html">Demo Sayfası</a></p>
+</footer>
+
+</body>
+</html>
